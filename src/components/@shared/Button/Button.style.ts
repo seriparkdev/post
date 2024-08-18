@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components';
-import { ButtonColor, ButtonSize } from './Button';
+import { ButtonColor } from './Button';
 import { COLORS } from '@/constants/colors';
+import { ElementSize } from '@/types/common';
 
 export const Button = styled.button<{
-  size: ButtonSize;
+  size: ElementSize;
   color: ButtonColor;
 }>`
   border: none;
