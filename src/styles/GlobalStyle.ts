@@ -17,4 +17,12 @@ export const GlobalStyle = createGlobalStyle`
   textarea {
     resize: none;
   }
+
+  li {
+    list-style: none;
+  }
+
+  ul {
+    padding-left: 0px;
+  }
 `;
