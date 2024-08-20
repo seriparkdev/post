@@ -1,12 +1,11 @@
-import { COLORS } from '@/constants/colors';
 import { ElementSize } from '@/types/common';
 import styled, { css } from 'styled-components';
 
 export const Input = styled.input<{ size: ElementSize }>`
   ${({ size }) => inputSize[size]}
   border: none;
+  border-bottom: 1px solid;
   outline: none;
-  background-color: ${COLORS.BLUE[20]};
 `;
 
 const inputSize = {
@@ -26,6 +25,11 @@ const inputSize = {
     width: 230px;
     padding: 12px 16px;
     border-radius: 8px;
+    font-size: 17px;
+  `,
+  full: css`
+    width: 100%;
+    padding: 12px 16px;
     font-size: 17px;
   `,
 };

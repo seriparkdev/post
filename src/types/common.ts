@@ -4,4 +4,4 @@ export interface ChildrenProps {
   children: ReactNode;
 }
 
-export type ElementSize = 'small' | 'medium' | 'large';
+export type ElementSize = 'small' | 'medium' | 'large' | 'full';

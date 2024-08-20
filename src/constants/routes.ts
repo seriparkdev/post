@@ -1,5 +1,6 @@
 export const ROUTES = {
   MAIN: '/',
   POST: '/:postId',
-  POST_EDITOR: '/editor/:postId',
+  NEW_POST: '/new',
+  EDIT_POST: '/edit/:id',
 };
