@@ -4,14 +4,15 @@ import { ROUTES } from '@/constants/routes';
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';
 
-const MainPage = lazy(() => import('@/components/pages/MainPage'));
-const PostPage = lazy(() => import('@/components/pages/PostPage'));
-const EditorPage = lazy(() => import('@/components/pages/EditorPage'));
+const MainPage = lazy(() => import('@/pages/MainPage/MainPage'));
+const PostPage = lazy(() => import('@/pages/PostPage/PostPage'));
+const EditorPage = lazy(() => import('@/pages/EditorPage/EditorPage'));
 
 const routes: RouteObject[] = [
   {
     path: '/',
     element: <App />,
+    errorElement: <div>Error!</div>,
     children: [
       {
         element: <Layout />,
@@ -25,7 +26,11 @@ const routes: RouteObject[] = [
             element: <PostPage />,
           },
           {
-            path: ROUTES.POST_EDITOR,
+            path: ROUTES.NEW_POST,
+            element: <EditorPage />,
+          },
+          {
+            path: ROUTES.EDIT_POST,
             element: <EditorPage />,
           },
         ],
