@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
+const HEADER_HEIGHT = 66;
+
 export const Content = styled.main`
-  height: calc(100dvh - 49px);
+  height: calc(100dvh - ${HEADER_HEIGHT}px);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
 `;
