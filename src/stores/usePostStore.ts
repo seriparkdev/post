@@ -4,16 +4,18 @@ import { create } from 'zustand';
 interface StoreState {
   postList: PostInfo[];
   registerPost: (newPost: PostInfo) => void;
+  updatePost: (updatedPost: PostInfo) => void;
+  getPost: (postId: string) => PostInfo | undefined;
 }
 
 interface PostInfo {
-  id: number;
+  id?: number;
   title: string;
   content: string;
   createDate: string;
 }
 
-const usePostStore = create<StoreState>((set) => ({
+const usePostStore = create<StoreState>((set, get) => ({
   postList: [
     {
       id: Date.now() + 1,
@@ -38,6 +40,16 @@ const usePostStore = create<StoreState>((set) => ({
     set((state) => ({
       postList: [newPost, ...state.postList],
     })),
+  updatePost: (updatedPost: PostInfo) =>
+    set((state) => ({
+      postList: state.postList.map((postInfo) =>
+        postInfo.id === updatedPost.id
+          ? { ...postInfo, ...updatedPost }
+          : postInfo
+      ),
+    })),
+  getPost: (postId: string) =>
+    get().postList.find((postInfo) => postInfo.id === Number(postId)),
 }));
 
 export default usePostStore;

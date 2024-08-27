@@ -1,13 +1,14 @@
+import Button from '@/components/@shared/Button/Button';
 import { ROUTES } from '@/constants/routes';
 import usePostStore from '@/stores/usePostStore';
 import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
 
 export default function PostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
-  const { postList } = usePostStore();
-  const postInfo = postList.find((postInfo) => postInfo.id === Number(postId));
+  const { getPost } = usePostStore();
+  const postInfo = postId ? getPost(postId) : '';
 
   useEffect(() => {
     if (!postId) {
@@ -23,6 +24,19 @@ export default function PostPage() {
       <div>제목: {postInfo.title}</div>
       <div>작성 일자: {postInfo.createDate}</div>
       <div>본문: {postInfo.content}</div>
+      <Button
+        onClick={() =>
+          navigate(
+            generatePath(ROUTES.EDIT_POST, {
+              postId,
+            })
+          )
+        }
+        size="full"
+        color="light"
+      >
+        수정
+      </Button>
     </>
   );
 }

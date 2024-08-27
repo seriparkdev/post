@@ -5,32 +5,50 @@ import useInput from '@/hooks/useInput';
 import * as S from '@/pages/EditorPage/style';
 import usePostStore from '@/stores/usePostStore';
 import { getToday } from '@/utils/date';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
 export default function EditorPage() {
   const navigate = useNavigate();
-  const { inputValue: title, handleInputChange: handleTitleChange } =
-    useInput();
-  const { inputValue: content, handleInputChange: handleContentChange } =
-    useInput();
-  const { registerPost } = usePostStore();
+  const location = useLocation();
+  const { postId } = useParams();
+  const { registerPost, updatePost, getPost } = usePostStore();
 
-  const handleRegisterPost = () => {
+  const EDITOR_TYPE = location.pathname === ROUTES.NEW_POST ? '등록' : '수정';
+  const postInfo =
+    EDITOR_TYPE === '수정' && postId ? getPost(postId) : undefined;
+
+  const { inputValue: title, handleInputChange: handleTitleChange } = useInput(
+    postInfo?.title
+  );
+  const { inputValue: content, handleInputChange: handleContentChange } =
+    useInput(postInfo?.content);
+
+  const handleSubmitPost = (e: React.MouseEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (title.length < 10) return alert('제목은 10자 이상 입력해주세요.');
 
-    registerPost({
-      id: Date.now(),
-      title,
-      content,
-      createDate: getToday(),
-    });
+    if (EDITOR_TYPE === '등록') {
+      registerPost({
+        id: Date.now(),
+        title,
+        content,
+        createDate: getToday(),
+      });
+    } else if (EDITOR_TYPE === '수정') {
+      updatePost({
+        id: postInfo?.id,
+        title,
+        content,
+        createDate: getToday(),
+      });
+    }
 
-    alert('게시글이 등록되었습니다.');
     navigate(ROUTES.MAIN);
   };
 
   return (
-    <>
+    <S.Form onSubmit={handleSubmitPost}>
       <Input
         value={title}
         onChange={handleTitleChange}
@@ -42,9 +60,9 @@ export default function EditorPage() {
         onChange={handleContentChange}
         placeholder="본문을 입력해주세요."
       />
-      <Button onClick={handleRegisterPost} size="full" color="light">
-        등록
+      <Button type="submit" size="full" color="light">
+        {EDITOR_TYPE}
       </Button>
-    </>
+    </S.Form>
   );
 }
