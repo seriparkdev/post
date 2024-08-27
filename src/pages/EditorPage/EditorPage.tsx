@@ -60,7 +60,12 @@ export default function EditorPage() {
         onChange={handleContentChange}
         placeholder="본문을 입력해주세요."
       />
-      <Button type="submit" size="full" color="light">
+      <Button
+        type="submit"
+        disabled={!title || !content}
+        size="full"
+        color="light"
+      >
         {EDITOR_TYPE}
       </Button>
     </S.Form>

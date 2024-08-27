@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const PostItem = styled.li`
   padding: 20px 30px;

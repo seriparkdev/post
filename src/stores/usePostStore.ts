@@ -6,6 +6,7 @@ interface StoreState {
   registerPost: (newPost: PostInfo) => void;
   updatePost: (updatedPost: PostInfo) => void;
   getPost: (postId: string) => PostInfo | undefined;
+  deletePost: (postId: string) => void;
 }
 
 interface PostInfo {
@@ -50,6 +51,12 @@ const usePostStore = create<StoreState>((set, get) => ({
     })),
   getPost: (postId: string) =>
     get().postList.find((postInfo) => postInfo.id === Number(postId)),
+  deletePost: (postId: string) =>
+    set((state) => ({
+      postList: state.postList.filter(
+        (postInfo) => postInfo.id !== Number(postId)
+      ),
+    })),
 }));
 
 export default usePostStore;
