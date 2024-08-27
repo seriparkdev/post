@@ -30,6 +30,11 @@ const buttonSize = {
     border-radius: 16px;
     font-size: 18px;
   `,
+  full: css`
+    padding: 12px;
+    border-radius: 16px;
+    font-size: 18px;
+  `,
 };
 
 const buttonColor = {

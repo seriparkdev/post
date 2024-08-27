@@ -6,8 +6,8 @@ export default function MainPage() {
 
   return (
     <S.PostList>
-      {postList.map(({ title, createDate }, index) => (
-        <S.PostItem key={title + index}>
+      {postList.map(({ title, createDate, id }) => (
+        <S.PostItem key={id}>
           <h3>{title}</h3>
           <p>{createDate}</p>
         </S.PostItem>

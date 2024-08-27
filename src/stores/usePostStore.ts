@@ -1,35 +1,43 @@
+import { getToday } from '@/utils/date';
 import { create } from 'zustand';
 
 interface StoreState {
-  postList: {
-    id: number;
-    title: string;
-    content: string;
-    createDate: string;
-  }[];
+  postList: PostInfo[];
+  registerPost: (newPost: PostInfo) => void;
 }
 
-const usePostStore = create<StoreState>(() => ({
+interface PostInfo {
+  id: number;
+  title: string;
+  content: string;
+  createDate: string;
+}
+
+const usePostStore = create<StoreState>((set) => ({
   postList: [
     {
-      id: 1,
+      id: Date.now() + 1,
       title: '게시물을 작성해보세요!',
       content: '본문 컨텐츠✏️',
-      createDate: new Date().toISOString().split('T')[0],
+      createDate: getToday(),
     },
     {
-      id: 2,
+      id: Date.now() + 2,
       title: '게시판 만들기',
       content: '본문 컨텐츠✏️',
-      createDate: new Date().toISOString().split('T')[0],
+      createDate: getToday(),
     },
     {
-      id: 3,
+      id: Date.now() + 3,
       title: 'Reat Framework Study',
       content: '본문 컨텐츠✏️',
-      createDate: new Date().toISOString().split('T')[0],
+      createDate: getToday(),
     },
   ],
+  registerPost: (newPost: PostInfo) =>
+    set((state) => ({
+      postList: [newPost, ...state.postList],
+    })),
 }));
 
 export default usePostStore;
