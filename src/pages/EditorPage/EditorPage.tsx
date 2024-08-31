@@ -60,14 +60,16 @@ export default function EditorPage() {
         onChange={handleContentChange}
         placeholder="본문을 입력해주세요."
       />
-      <Button
-        type="submit"
-        disabled={!title || !content}
-        size="full"
-        color="light"
-      >
-        {EDITOR_TYPE}
-      </Button>
+      <div>
+        <Button
+          type="submit"
+          disabled={!title || !content}
+          size="full"
+          color="light"
+        >
+          {EDITOR_TYPE}
+        </Button>
+      </div>
     </S.Form>
   );
 }

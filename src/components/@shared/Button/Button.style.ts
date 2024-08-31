@@ -31,6 +31,7 @@ const buttonSize = {
     font-size: 18px;
   `,
   full: css`
+    width: 100%;
     padding: 12px;
     border-radius: 16px;
     font-size: 18px;

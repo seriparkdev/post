@@ -9,9 +9,28 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   * {
-    font-family: 'Pretendard', sans-serif;
     box-sizing: border-box;
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body {
+    font-family: 'Pretendard', sans-serif;
+    display: flex;
+    justify-content: center;
     margin: 0;
+    align-items: center;
+  }
+
+  #root {
+    min-width: 320px;
+    max-width: 480px;
+    width: 100%;
+    height: 100%;
   }
 
   textarea {
@@ -23,6 +42,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   ul {
+    margin: 0;
     padding-left: 0px;
   }
 `;

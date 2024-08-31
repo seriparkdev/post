@@ -32,27 +32,31 @@ export default function PostPage() {
 
   return (
     <>
-      <div>제목: {postInfo.title}</div>
-      <div>작성 일자: {postInfo.createDate}</div>
-      <div>본문: {postInfo.content}</div>
-      <S.ButtonWrapper>
-        <Button
-          onClick={() =>
-            navigate(
-              generatePath(ROUTES.EDIT_POST, {
-                postId,
-              })
-            )
-          }
-          size="full"
-          color="dark"
-        >
-          수정
-        </Button>
-        <Button onClick={handlePostDelete} size="full" color="light">
-          삭제
-        </Button>
-      </S.ButtonWrapper>
+      <S.TitleWrapper>
+        <S.Title>
+          <h3>{postInfo.title}</h3>
+          <S.ButtonWrapper>
+            <Button
+              onClick={() =>
+                navigate(
+                  generatePath(ROUTES.EDIT_POST, {
+                    postId,
+                  })
+                )
+              }
+              size="medium"
+              color="dark"
+            >
+              수정
+            </Button>
+            <Button onClick={handlePostDelete} size="medium" color="light">
+              삭제
+            </Button>
+          </S.ButtonWrapper>
+        </S.Title>
+        <div>작성일자: {postInfo.createDate}</div>
+      </S.TitleWrapper>
+      <S.Content>{postInfo.content}</S.Content>
     </>
   );
 }
