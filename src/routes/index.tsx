@@ -1,5 +1,5 @@
 import App from '@/App';
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/Layout/Layout';
 import { ROUTES } from '@/constants/routes';
 import { lazy } from 'react';
 import { RouteObject } from 'react-router-dom';

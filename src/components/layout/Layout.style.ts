@@ -1,5 +1,7 @@
-import { COLORS } from '@/constants/colors';
 import styled from 'styled-components';
+import { COLORS } from '@/constants/colors';
+
+const HEADER_HEIGHT = 69;
 
 export const Header = styled.header`
   color: ${COLORS.WHITE};
@@ -8,4 +10,10 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+export const Content = styled.main`
+  height: calc(100dvh - ${HEADER_HEIGHT}px);
+  display: flex;
+  flex-direction: column;
 `;

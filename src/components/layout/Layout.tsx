@@ -1,14 +1,26 @@
-import Content from './Content/Content';
-import Header from './Header/Header';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import * as S from '@/components/Layout/Layout.style';
+import Button from '@/components/@shared/Button/Button';
+import { ROUTES } from '@/constants/routes';
 
 export default function Layout() {
+  const navigate = useNavigate();
+
   return (
     <>
-      <Header>게시판</Header>
-      <Content>
+      <S.Header>
+        <h2>게시판</h2>
+        <Button
+          size="medium"
+          color="light"
+          onClick={() => navigate(ROUTES.NEW_POST)}
+        >
+          작성
+        </Button>
+      </S.Header>
+      <S.Content>
         <Outlet />
-      </Content>
+      </S.Content>
     </>
   );
 }
