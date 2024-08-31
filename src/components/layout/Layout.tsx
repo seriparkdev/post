@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import * as S from '@/components/Layout/Layout.style';
 import Button from '@/components/@shared/Button/Button';
 import { ROUTES } from '@/constants/routes';
@@ -9,7 +9,9 @@ export default function Layout() {
   return (
     <>
       <S.Header>
-        <h2>게시판</h2>
+        <Link to={ROUTES.MAIN}>
+          <h2>게시판</h2>
+        </Link>
         <Button
           size="medium"
           color="light"
