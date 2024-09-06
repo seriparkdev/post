@@ -10,33 +10,35 @@ interface StoreState {
 }
 
 interface PostInfo {
-  id?: number;
+  id: string;
   title: string;
   content: string;
   createDate: string;
 }
 
+const postListMockData = [
+  {
+    id: String(Date.now() + 1),
+    title: '게시물을 작성해보세요!',
+    content: '본문 컨텐츠✏️',
+    createDate: getToday(),
+  },
+  {
+    id: String(Date.now() + 2),
+    title: '게시판 만들기',
+    content: '본문 컨텐츠✏️',
+    createDate: getToday(),
+  },
+  {
+    id: String(Date.now() + 3),
+    title: 'Reat Framework Study',
+    content: '본문 컨텐츠✏️',
+    createDate: getToday(),
+  },
+];
+
 const usePostStore = create<StoreState>((set, get) => ({
-  postList: [
-    {
-      id: Date.now() + 1,
-      title: '게시물을 작성해보세요!',
-      content: '본문 컨텐츠✏️',
-      createDate: getToday(),
-    },
-    {
-      id: Date.now() + 2,
-      title: '게시판 만들기',
-      content: '본문 컨텐츠✏️',
-      createDate: getToday(),
-    },
-    {
-      id: Date.now() + 3,
-      title: 'Reat Framework Study',
-      content: '본문 컨텐츠✏️',
-      createDate: getToday(),
-    },
-  ],
+  postList: postListMockData,
   registerPost: (newPost: PostInfo) =>
     set((state) => ({
       postList: [newPost, ...state.postList],
@@ -50,12 +52,10 @@ const usePostStore = create<StoreState>((set, get) => ({
       ),
     })),
   getPost: (postId: string) =>
-    get().postList.find((postInfo) => postInfo.id === Number(postId)),
+    get().postList.find((postInfo) => postInfo.id === postId),
   deletePost: (postId: string) =>
     set((state) => ({
-      postList: state.postList.filter(
-        (postInfo) => postInfo.id !== Number(postId)
-      ),
+      postList: state.postList.filter((postInfo) => postInfo.id !== postId),
     })),
 }));
 

@@ -9,24 +9,21 @@ export default function PostPage() {
   const navigate = useNavigate();
   const { postId } = useParams();
   const { getPost, deletePost } = usePostStore();
-  const postInfo = postId ? getPost(postId) : '';
+  const postInfo = postId && getPost(postId);
 
   const handlePostDelete = () => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
-      if (postId) {
-        deletePost(postId);
-        alert('삭제 되었습니다.');
-        navigate(ROUTES.MAIN);
-      }
+    if (postId && window.confirm('정말 삭제하시겠습니까?')) {
+      deletePost(postId);
+      navigate(ROUTES.MAIN);
     }
   };
 
   useEffect(() => {
-    if (!postId) {
+    if (!postId && !postInfo) {
       alert('해당 게시글을 조회할 수 없습니다.');
       return navigate(ROUTES.MAIN);
     }
-  }, [postId, navigate]);
+  }, [postId, postInfo, navigate]);
 
   if (!postInfo) return <>앗, 해당 게시물을 찾을 수 없습니다</>;
 

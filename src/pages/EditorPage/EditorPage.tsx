@@ -1,5 +1,6 @@
 import Button from '@/components/@shared/Button/Button';
 import Input from '@/components/@shared/Input/Input';
+import { FORM } from '@/constants/form';
 import { ROUTES } from '@/constants/routes';
 import useInput from '@/hooks/useInput';
 import * as S from '@/pages/EditorPage/style';
@@ -13,9 +14,10 @@ export default function EditorPage() {
   const { postId } = useParams();
   const { registerPost, updatePost, getPost } = usePostStore();
 
-  const EDITOR_TYPE = location.pathname === ROUTES.NEW_POST ? '등록' : '수정';
+  const EDITOR_TYPE =
+    location.pathname === ROUTES.NEW_POST ? FORM.REGISTRATION : FORM.EDIT;
   const postInfo =
-    EDITOR_TYPE === '수정' && postId ? getPost(postId) : undefined;
+    EDITOR_TYPE === FORM.EDIT && postId ? getPost(postId) : undefined;
 
   const { inputValue: title, handleInputChange: handleTitleChange } = useInput(
     postInfo?.title
@@ -28,20 +30,22 @@ export default function EditorPage() {
 
     if (title.length < 10) return alert('제목은 10자 이상 입력해주세요.');
 
-    if (EDITOR_TYPE === '등록') {
+    if (EDITOR_TYPE === FORM.REGISTRATION) {
       registerPost({
-        id: Date.now(),
+        id: String(Date.now()),
         title,
         content,
         createDate: getToday(),
       });
-    } else if (EDITOR_TYPE === '수정') {
+    } else if (EDITOR_TYPE === FORM.EDIT && postInfo) {
       updatePost({
-        id: postInfo?.id,
+        id: postInfo.id,
         title,
         content,
         createDate: getToday(),
       });
+    } else {
+      return alert(`${EDITOR_TYPE}에 실패했습니다.`);
     }
 
     navigate(ROUTES.MAIN);
