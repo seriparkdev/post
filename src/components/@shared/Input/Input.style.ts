@@ -1,10 +1,11 @@
+import { COLORS } from '@/constants/colors';
 import { ElementSize } from '@/types/common';
 import styled, { css } from 'styled-components';
 
 export const Input = styled.input<{ size: ElementSize }>`
   ${({ size }) => inputSize[size]}
   border: none;
-  border-bottom: 1px solid;
+  border-bottom: 1px solid ${COLORS.GREY[20]};
   outline: none;
 `;
 
